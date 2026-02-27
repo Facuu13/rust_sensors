@@ -3,23 +3,29 @@ struct Sensor {
     temperature: f32,
 }
 
+impl Sensor {
+    fn new(id: &str, temperature: f32) -> Self {
+        Self {
+            id: id.to_string(),
+            temperature,
+        }
+    }
+
+    fn update_temperature(&mut self, new_temp: f32) {
+        self.temperature = new_temp;
+    }
+
+    fn print(&self) {
+        println!("Sensor {} -> {}°C", self.id, self.temperature);
+    }
+}
+
 fn main() {
-    let mut sensor = Sensor {
-        id: String::from("esp32-01"),
-        temperature: 25.0,
-    };
+    let mut sensor = Sensor::new("esp32-01", 25.0);
 
-    print_sensor(&sensor);
+    sensor.print();
 
-    update_temperature(&mut sensor, 30.5);
+    sensor.update_temperature(31.5);
 
-    print_sensor(&sensor);
-}
-
-fn print_sensor(sensor: &Sensor) {
-    println!("Sensor {} -> {}°C", sensor.id, sensor.temperature);
-}
-
-fn update_temperature(sensor: &mut Sensor, new_temp: f32) {
-    sensor.temperature = new_temp;
+    sensor.print();
 }
