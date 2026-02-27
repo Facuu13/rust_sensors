@@ -18,6 +18,10 @@ impl Sensor {
     fn print(&self) {
         println!("Sensor {} -> {}°C", self.id, self.temperature);
     }
+
+    fn is_hot(&self) -> bool {
+        self.temperature > 28.0
+    }
 }
 
 fn main() {
@@ -28,4 +32,9 @@ fn main() {
     sensor.update_temperature(31.5);
 
     sensor.print();
+
+    if sensor.is_hot() {
+        println!("🔥 Sensor is hot!");
+    }
 }
+
